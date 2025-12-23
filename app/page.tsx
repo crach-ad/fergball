@@ -4,10 +4,11 @@ import { useEffect, useState } from "react"
 import { motion, useReducedMotion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { ArrowRight, CheckCircle, Phone, Mail } from "lucide-react"
+import { ArrowRight, CheckCircle, Phone, Mail, Menu } from "lucide-react"
 import Link from "next/link"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { AnimatedLogo } from "@/components/animated-logo"
+import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet"
 
 const container = {
   hidden: { opacity: 0 },
@@ -49,6 +50,7 @@ export default function HomePage() {
             <Link href="/" className="flex items-center">
               <AnimatedLogo />
             </Link>
+            {/* Desktop Nav */}
             <div className="hidden md:flex items-center gap-6 text-sm">
               <Link href="#programs" className="hover:opacity-70 transition-opacity">
                 Programs
@@ -64,6 +66,45 @@ export default function HomePage() {
                 <Button size="sm" variant="outline">Member Area</Button>
               </Link>
               <Button size="sm">Book A Call</Button>
+            </div>
+
+            {/* Mobile Nav */}
+            <div className="flex md:hidden items-center gap-2">
+              <ThemeToggle />
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button variant="ghost" size="icon">
+                    <Menu className="h-5 w-5" />
+                    <span className="sr-only">Open menu</span>
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="right" className="w-[280px]">
+                  <div className="flex flex-col gap-6 mt-8">
+                    <SheetClose asChild>
+                      <Link href="#programs" className="text-lg font-medium hover:opacity-70 transition-opacity">
+                        Programs
+                      </Link>
+                    </SheetClose>
+                    <SheetClose asChild>
+                      <Link href="#results" className="text-lg font-medium hover:opacity-70 transition-opacity">
+                        Results
+                      </Link>
+                    </SheetClose>
+                    <SheetClose asChild>
+                      <Link href="#about" className="text-lg font-medium hover:opacity-70 transition-opacity">
+                        About
+                      </Link>
+                    </SheetClose>
+                    <hr className="border-border" />
+                    <SheetClose asChild>
+                      <Link href="/dashboard">
+                        <Button variant="outline" className="w-full">Member Area</Button>
+                      </Link>
+                    </SheetClose>
+                    <Button className="w-full">Book A Call</Button>
+                  </div>
+                </SheetContent>
+              </Sheet>
             </div>
           </div>
         </div>
